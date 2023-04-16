@@ -6,11 +6,11 @@ import cv2
 import numpy as np
 from PIL import Image
 
-from nets.unet import Unet as unet
+from nets.CAL_Net import CAL_Net as cal_net
 from utils.utils import cvtColor, preprocess_input, resize_image, show_config
 # from transunet.model import TransUNet
 
-class Unet(object):
+class CAL_Net(object):
     _defaults = {
 
         "model_path"        : 'logs/densenet121/ep120-loss0.136-val_loss0.211.h5',
@@ -47,7 +47,7 @@ class Unet(object):
 
     def generate(self):
 
-        self.model = unet([self.input_shape[0], self.input_shape[1], 3], self.num_classes, self.backbone)
+        self.model = cal_net([self.input_shape[0], self.input_shape[1], 3], self.num_classes, self.backbone)
         # self.model = TransUNet(256)
         self.model.load_weights(self.model_path)
         print('{} model loaded.'.format(self.model_path))
