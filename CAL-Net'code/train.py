@@ -9,7 +9,7 @@ from tensorflow.keras.callbacks import (EarlyStopping, LearningRateScheduler,
                                         TensorBoard)
 from tensorflow.keras.optimizers import SGD, Adam
 from nets.unetv4 import Unetv4
-from nets.unet import Unet
+from nets.CAL_Net import CAL_Net
 from nets.unet_training import (CE, Focal_Loss, dice_loss_with_CE,
                                 dice_loss_with_Focal_Loss, get_lr_scheduler)
 from utils.callbacks import (EvalCallback, ExponentDecayScheduler, LossHistory,
@@ -66,14 +66,14 @@ if __name__ == "__main__":
     
     if ngpus_per_node > 1:
         with strategy.scope():
-            # model = Unet([input_shape[0], input_shape[1], 3], num_classes, backbone)
+            # model = CAL_Net([input_shape[0], input_shape[1], 3], num_classes, backbone)
             model = TransUNet(256)
             if model_path != '':
 
                 model.load_weights(model_path, by_name=True, skip_mismatch=True)
     else:
 
-        model = Unet([input_shape[0], input_shape[1], 3], num_classes, backbone)
+        model = CAL_Net([input_shape[0], input_shape[1], 3], num_classes, backbone)
         # model = TransUNet(256)
         if model_path != '':
 
