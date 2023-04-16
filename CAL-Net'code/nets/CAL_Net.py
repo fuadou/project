@@ -183,7 +183,7 @@ def cbam_block(cbam_feature, ratio=8, name=""):
     cbam_feature = spatial_attention(cbam_feature, name=name)
     return cbam_feature
 
-def Unet(input_shape=(256, 256, 3), num_classes=2, backbone="vgg", phi='tiny', weight_decay=5e-4):
+def CAL_Net(input_shape=(256, 256, 3), num_classes=2, backbone="vgg", phi='tiny', weight_decay=5e-4):
     inputs = Input(input_shape)
     # -------------------------------#
     #   获得五个有效特征层
